@@ -1,0 +1,938 @@
+<!DOCTYPE html>
+<html lang="id">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0, viewport-fit=cover" />
+  <title>SPMB | Al-Amin Cintamulya</title>
+  <link rel="icon" type="image/png" href="favicon.png" />
+  <link rel="preconnect" href="https://fonts.googleapis.com" />
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+  <link href="https://fonts.googleapis.com/css2?family=Outfit:wght@300;400;500;600;700;800&family=Inter:wght@300;400;500;600&display=swap" rel="stylesheet" />
+  <style>
+    *, *::before, *::after { box-sizing: border-box; margin: 0; padding: 0; }
+
+    :root {
+      --green-950: #0a2e1f;
+      --green-900: #0f3d2a;
+      --green-800: #1a5c47;
+      --green-700: #1d7a5e;
+      --green-600: #25a579;
+      --green-500: #2eb88f;
+      --green-400: #3fd9a3;
+      --green-300: #67e8b9;
+      --green-200: #a6f5d4;
+      --green-100: #d7fce8;
+      --green-50: #f0fdf7;
+      --white: #ffffff;
+      --gray-50: #f9fafb;
+      --gray-100: #f3f4f6;
+      --gray-200: #e5e7eb;
+      --gray-300: #d1d5db;
+      --gray-400: #9ca3af;
+      --gray-500: #6b7280;
+      --gray-600: #4b5563;
+      --gray-700: #374151;
+      --gray-800: #1f2937;
+      --gray-900: #111827;
+      
+      --shadow-xs: 0 1px 2px 0 rgba(0, 0, 0, 0.05);
+      --shadow-sm: 0 2px 8px -1px rgba(0, 0, 0, 0.08);
+      --shadow-md: 0 8px 20px -2px rgba(0, 0, 0, 0.1);
+      --shadow-lg: 0 16px 40px -4px rgba(0, 0, 0, 0.12);
+      --shadow-xl: 0 20px 60px -6px rgba(0, 0, 0, 0.15);
+      
+      --radius: 16px;
+      --radius-md: 12px;
+      --radius-sm: 8px;
+      
+      --duration-fast: 150ms;
+      --duration-base: 300ms;
+      --duration-slow: 500ms;
+      --easing: cubic-bezier(0.4, 0, 0.2, 1);
+    }
+
+    html { scroll-behavior: smooth; }
+
+    body {
+      font-family: 'Inter', sans-serif;
+      background: var(--white);
+      color: var(--gray-900);
+      min-height: 100vh;
+      overflow-x: hidden;
+      line-height: 1.6;
+    }
+
+    body::before {
+      content: '';
+      position: fixed;
+      inset: 0;
+      background:
+        radial-gradient(ellipse 80% 80% at 20% 15%, rgba(45, 184, 143, 0.06) 0%, transparent 50%),
+        radial-gradient(ellipse 100% 100% at 80% 85%, rgba(29, 122, 94, 0.05) 0%, transparent 50%);
+      pointer-events: none;
+      z-index: 0;
+    }
+
+    .page-wrapper {
+      position: relative;
+      z-index: 1;
+      display: flex;
+      flex-direction: column;
+      min-height: 100vh;
+    }
+
+    /* ── NAVBAR ── */
+    nav {
+      position: sticky;
+      top: 0;
+      z-index: 100;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      gap: 12px;
+      padding: 16px 28px;
+      background: rgba(255, 255, 255, 0.80);
+      backdrop-filter: blur(20px);
+      -webkit-backdrop-filter: blur(20px);
+      border-bottom: 1px solid rgba(45, 184, 143, 0.1);
+      box-shadow: var(--shadow-xs);
+    }
+
+    nav img.logo {
+      height: 40px;
+      width: auto;
+      object-fit: contain;
+    }
+
+    nav .site-name {
+      font-family: 'Outfit', sans-serif;
+      font-size: 1.1rem;
+      font-weight: 700;
+      color: var(--green-900);
+      letter-spacing: -0.01em;
+    }
+
+    /* ── HERO ── */
+    .hero {
+      flex: 1;
+      display: flex;
+      flex-direction: column;
+      align-items: center;
+      justify-content: center;
+      padding: 48px 24px 60px;
+      text-align: center;
+      gap: 0;
+    }
+
+    .badge {
+      display: inline-flex;
+      align-items: center;
+      gap: 8px;
+      background: linear-gradient(135deg, rgba(45, 184, 143, 0.1), rgba(45, 184, 143, 0.05));
+      color: var(--green-700);
+      border: 1px solid rgba(45, 184, 143, 0.3);
+      border-radius: 100px;
+      font-size: 0.75rem;
+      font-weight: 600;
+      letter-spacing: 0.05em;
+      text-transform: uppercase;
+      padding: 8px 16px;
+      margin-bottom: 20px;
+      animation: fadeInUp 0.6s var(--easing);
+    }
+
+    .badge span.dot {
+      width: 6px;
+      height: 6px;
+      border-radius: 50%;
+      background: var(--green-500);
+      animation: pulse 2s ease-in-out infinite;
+      display: inline-block;
+    }
+
+    @keyframes pulse {
+      0%, 100% { transform: scale(1); opacity: 1; }
+      50% { transform: scale(1.4); opacity: 0.5; }
+    }
+
+    h1 {
+      font-family: 'Outfit', sans-serif;
+      font-size: clamp(2rem, 6vw, 3.8rem);
+      font-weight: 800;
+      color: var(--green-950);
+      line-height: 1.1;
+      max-width: 800px;
+      margin-bottom: 16px;
+      animation: fadeInUp 0.7s 0.1s var(--easing) both;
+      letter-spacing: -0.02em;
+    }
+
+    h1 em {
+      font-style: normal;
+      background: linear-gradient(135deg, var(--green-600) 0%, var(--green-400) 100%);
+      -webkit-background-clip: text;
+      -webkit-text-fill-color: transparent;
+      background-clip: text;
+      font-weight: 800;
+    }
+
+    .subtitle {
+      font-size: clamp(0.95rem, 2.5vw, 1.05rem);
+      color: var(--gray-600);
+      font-weight: 400;
+      max-width: 700px;
+      line-height: 1.8;
+      margin-bottom: 20px;
+      margin-left: 20px;
+      margin-right: 20px;
+      animation: fadeInUp 0.7s 0.15s var(--easing) both;
+      text-align: justify;
+    }
+
+    /* ── Countdown ── */
+    .countdown-section {
+      margin-bottom: 48px;
+      animation: fadeInUp 0.7s 0.2s var(--easing) both;
+    }
+
+    .countdown-label {
+      font-size: 0.75rem;
+      font-weight: 700;
+      letter-spacing: 0.08em;
+      text-transform: uppercase;
+      color: var(--green-700);
+      margin-bottom: 20px;
+    }
+
+    .countdown {
+      display: flex;
+      gap: 8px;
+      justify-content: center;
+      flex-wrap: nowrap;
+    }
+
+    .cd-box {
+      display: flex;
+      flex-direction: column;
+      align-items: center;
+      justify-content: center;
+      background: var(--white);
+      border: 1.5px solid var(--green-200);
+      border-radius: var(--radius-md);
+      padding: 18px 16px;
+      min-width: 76px;
+      box-shadow: var(--shadow-sm);
+      transition: all var(--duration-base) var(--easing);
+    }
+
+    .cd-box:hover {
+      transform: translateY(-4px);
+      border-color: var(--green-400);
+      box-shadow: var(--shadow-md);
+    }
+
+    .cd-num {
+      font-family: 'Outfit', sans-serif;
+      font-size: 2.2rem;
+      font-weight: 800;
+      color: var(--green-700);
+      line-height: 1;
+      min-width: 2ch;
+      text-align: center;
+    }
+
+    .cd-unit {
+      font-size: 0.65rem;
+      font-weight: 600;
+      letter-spacing: 0.05em;
+      text-transform: uppercase;
+      color: var(--gray-500);
+      margin-top: 6px;
+    }
+
+    .cd-sep {
+      font-family: 'Outfit', sans-serif;
+      font-size: 1.4rem;
+      font-weight: 600;
+      color: var(--green-200);
+      align-self: center;
+      padding: 0 4px;
+    }
+
+    /* ── Progress Bar ── */
+    .progress-section {
+      width: calc(100% - 40px);
+      max-width: 600px;
+      margin: 0 auto 56px;
+      animation: fadeInUp 0.7s 0.4s var(--easing) both;
+    }
+
+    .progress-header {
+      display: flex;
+      justify-content: space-between;
+      font-size: 0.8rem;
+      font-weight: 600;
+      color: var(--gray-700);
+      margin-bottom: 12px;
+    }
+
+    .progress-bar {
+      height: 8px;
+      border-radius: 100px;
+      background: var(--green-100);
+      overflow: hidden;
+      box-shadow: inset 0 2px 4px rgba(0, 0, 0, 0.05);
+    }
+
+    .progress-fill {
+      height: 100%;
+      border-radius: 100px;
+      width: 0%;
+      transition: width 1.5s cubic-bezier(0.4, 0, 0.2, 1), background 1s ease;
+    }
+
+    /* ── SPMB Section ── */
+    .spmb-section {
+      width: 100%;
+      max-width: 1000px;
+      margin: 0 auto 72px;
+      animation: fadeInUp 0.7s 0.35s var(--easing) both;
+    }
+
+    .spmb-card {
+      background: var(--white);
+      border: 1.5px solid var(--green-200);
+      border-radius: var(--radius);
+      overflow: hidden;
+      box-shadow: var(--shadow-lg);
+      transition: all var(--duration-base) var(--easing);
+    }
+
+    .spmb-card:hover {
+      box-shadow: var(--shadow-xl);
+    }
+
+    .spmb-header {
+      background: linear-gradient(135deg, var(--green-950) 0%, var(--green-800) 50%, var(--green-600) 100%);
+      padding: 32px 40px 10px;
+      display: flex;
+      flex-direction: column;
+      gap: 16px;
+      position: relative;
+      overflow: hidden;
+    }
+
+    .spmb-header::before {
+      content: '';
+      position: absolute;
+      right: -80px;
+      top: -80px;
+      width: 300px;
+      height: 300px;
+      border-radius: 50%;
+      background: rgba(255, 255, 255, 0.04);
+      filter: blur(60px);
+    }
+
+    .spmb-header::after {
+      content: '';
+      position: absolute;
+      left: -60px;
+      bottom: -60px;
+      width: 240px;
+      height: 240px;
+      border-radius: 50%;
+      background: rgba(255, 255, 255, 0.03);
+      filter: blur(50px);
+    }
+
+    .spmb-active-badge {
+      align-self: center;
+      z-index: 2;
+      display: inline-flex;
+      align-items: center;
+      gap: 7px;
+      background: rgba(255, 255, 255, 0.12);
+      border: 1px solid rgba(255, 255, 255, 0.2);
+      border-radius: 100px;
+      padding: 7px 16px;
+      font-size: 0.7rem;
+      font-weight: 700;
+      letter-spacing: 0.06em;
+      text-transform: uppercase;
+      color: var(--white);
+    }
+
+    .spmb-active-badge .dot-live {
+      width: 7px;
+      height: 7px;
+      border-radius: 50%;
+      background: #4ade80;
+      animation: pulse 1.8s ease-in-out infinite;
+      display: inline-block;
+    }
+
+    .spmb-header-main {
+      display: flex;
+      align-items: flex-start;
+      gap: 20px;
+      z-index: 2;
+    }
+
+    .spmb-header-text {
+      color: var(--white);
+    }
+
+    .spmb-header-text h2 {
+      font-family: 'Outfit', sans-serif;
+      font-size: 1.5rem;
+      font-weight: 800;
+      margin-bottom: 8px;
+      line-height: 1.2;
+      letter-spacing: -0.01em;
+    }
+
+    .spmb-header-text p {
+      font-size: 0.9rem;
+      opacity: 0.85;
+      text-align: justify;
+      line-height: 1.7;
+      font-weight: 400;
+    }
+
+    .spmb-stats {
+      display: flex;
+      align-items: center;
+      background: rgba(0, 0, 0, 0.12);
+      border-top: 1px solid rgba(255, 255, 255, 0.1);
+      margin: 0 -40px;
+      padding: 20px 40px;
+      gap: 0;
+      z-index: 2;
+      justify-content: center;
+    }
+
+    .spmb-stat {
+      display: flex;
+      flex-direction: column;
+      gap: 4px;
+      flex: 1;
+      align-items: center;
+      text-align: center;
+    }
+
+    .spmb-stat-num {
+      font-family: 'Outfit', sans-serif;
+      font-size: 1.1rem;
+      font-weight: 700;
+      color: var(--white);
+    }
+
+    .spmb-stat-label {
+      font-size: 0.7rem;
+      font-weight: 600;
+      letter-spacing: 0.05em;
+      text-transform: uppercase;
+      color: rgba(255, 255, 255, 0.6);
+    }
+
+    .spmb-body {
+      padding: 40px;
+    }
+
+    /* ── Registration path cards ── */
+    .reg-paths {
+      display: grid;
+      grid-template-columns: repeat(auto-fit, minmax(240px, 1fr));
+      gap: 16px;
+      margin-bottom: 32px;
+    }
+
+    .reg-path {
+      border-radius: var(--radius-md);
+      padding: 24px;
+      border: 2px solid;
+      display: flex;
+      flex-direction: column;
+      gap: 12px;
+      transition: all var(--duration-base) var(--easing);
+      text-align: center;
+    }
+
+    .reg-path:hover {
+      transform: translateY(-4px);
+      box-shadow: var(--shadow-md);
+    }
+
+    .reg-path.online {
+      background: linear-gradient(135deg, rgba(45, 184, 143, 0.06), rgba(45, 184, 143, 0.02));
+      border-color: var(--green-200);
+    }
+
+    .reg-path.online:hover {
+      border-color: var(--green-400);
+      background: linear-gradient(135deg, rgba(45, 184, 143, 0.1), rgba(45, 184, 143, 0.04));
+    }
+
+    .reg-path.offline {
+      background: linear-gradient(135deg, rgba(156, 163, 175, 0.04), rgba(156, 163, 175, 0.02));
+      border-color: var(--gray-200);
+    }
+
+    .reg-path.offline:hover {
+      border-color: var(--gray-300);
+      background: linear-gradient(135deg, rgba(156, 163, 175, 0.08), rgba(156, 163, 175, 0.04));
+    }
+
+    .reg-path-icon {
+      width: 48px;
+      height: 48px;
+      border-radius: 12px;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      margin: 0 auto;
+    }
+
+    .reg-path.online .reg-path-icon { background: var(--green-100); }
+    .reg-path.offline .reg-path-icon { background: var(--gray-100); }
+
+    .reg-path-icon svg { width: 24px; height: 24px; }
+
+    .reg-path-label {
+      font-size: 0.7rem;
+      font-weight: 700;
+      letter-spacing: 0.06em;
+      text-transform: uppercase;
+    }
+
+    .reg-path.online .reg-path-label { color: var(--green-700); }
+    .reg-path.offline .reg-path-label { color: var(--gray-700); }
+
+    .reg-path-title {
+      font-size: 1.05rem;
+      font-weight: 700;
+      color: var(--green-950);
+      line-height: 1.3;
+      font-family: 'Outfit', sans-serif;
+    }
+
+    .reg-path-desc {
+      font-size: 0.82rem;
+      color: var(--gray-600);
+      line-height: 1.6;
+    }
+
+    /* ── CTA Buttons ── */
+    .cta-row {
+      display: flex;
+      flex-direction: row;
+      gap: 14px;
+      margin-bottom: 40px;
+      align-items: stretch;
+      justify-content: center;
+      width: 100%;
+    }
+
+    .btn-primary, .wa-btn {
+      display: inline-flex;
+      align-items: center;
+      justify-content: center;
+      gap: 10px;
+      flex: 1;
+      min-width: 0;
+      text-align: center;
+      text-decoration: none;
+      font-weight: 600;
+      border-radius: 12px;
+      padding: 14px 24px;
+      transition: all var(--duration-base) var(--easing);
+      font-size: 0.95rem;
+      white-space: nowrap;
+      border: none;
+      cursor: pointer;
+      font-family: 'Inter', sans-serif;
+    }
+
+    .btn-primary {
+      background: linear-gradient(135deg, var(--green-600) 0%, var(--green-500) 100%);
+      color: var(--white);
+      box-shadow: 0 8px 24px rgba(45, 184, 143, 0.3);
+    }
+
+    .btn-primary:hover {
+      background: linear-gradient(135deg, var(--green-700) 0%, var(--green-600) 100%);
+      transform: translateY(-3px);
+      box-shadow: 0 12px 32px rgba(45, 184, 143, 0.4);
+    }
+
+    .btn-primary:active { transform: translateY(-1px); }
+    .btn-primary svg { width: 18px; height: 18px; flex-shrink: 0; }
+
+    .wa-btn {
+      background: linear-gradient(135deg, #1ab854 0%, #16a84a 100%);
+      color: var(--white);
+      box-shadow: 0 8px 24px rgba(22, 168, 74, 0.3);
+    }
+
+    .wa-btn:hover {
+      background: linear-gradient(135deg, #1db954 0%, #178f45 100%);
+      transform: translateY(-3px);
+      box-shadow: 0 12px 32px rgba(22, 168, 74, 0.4);
+    }
+
+    .wa-btn:active { transform: translateY(-1px); }
+    .wa-btn svg { width: 18px; height: 18px; flex-shrink: 0; }
+
+    /* ── Maps ── */
+    .map-label {
+      font-size: 0.75rem;
+      font-weight: 700;
+      letter-spacing: 0.06em;
+      text-transform: uppercase;
+      color: var(--green-700);
+      margin-bottom: 16px;
+      display: flex;
+      align-items: center;
+      gap: 8px;
+    }
+
+    .map-label svg { width: 16px; height: 16px; stroke: var(--green-600); }
+
+    .map-wrap {
+      border-radius: var(--radius-md);
+      overflow: hidden;
+      border: 1.5px solid var(--green-200);
+      box-shadow: var(--shadow-md);
+    }
+
+    .map-wrap iframe {
+      width: 100%;
+      height: 380px;
+      border: 0;
+      display: block;
+    }
+
+    /* ── Mobile Responsive ── */
+    @media (max-width: 768px) {
+      nav { padding: 12px 20px; }
+      nav .site-name { font-size: 1rem; }
+      nav img.logo { height: 36px; }
+      .hero { padding: 32px 20px 48px; }
+      h1 { margin-bottom: 12px; }
+
+      .cd-box { padding: 12px 8px; min-width: 0; flex: 1; }
+      .cd-num { font-size: 1.5rem; }
+      .cd-sep { font-size: 1rem; padding: 0 2px; }
+
+      .cta-row { flex-direction: column; gap: 12px; }
+      .btn-primary, .wa-btn { width: 100%; flex: 0 0 auto; padding: 14px 20px; }
+
+      .spmb-header { padding: 24px 24px 10px; gap: 16px; }
+      .spmb-header-main { flex-direction: column; gap: 12px; }
+      .spmb-header-text h2 { font-size: 1.25rem; }
+      .spmb-body { padding: 28px 24px; }
+      .spmb-stats { margin: 0 -24px; padding: 16px 24px; }
+    }
+
+    @media (max-width: 480px) {
+      .hero { padding: 24px 16px 40px; }
+      h1 { font-size: 1.75rem; }
+      .cd-box { padding: 10px 6px; }
+      .cd-num { font-size: 1.3rem; }
+      .cd-sep { font-size: 0.9rem; }
+      .btn-primary, .wa-btn { padding: 12px 16px; font-size: 0.9rem; }
+      .spmb-header { padding: 20px 16px 10px; }
+      .spmb-body { padding: 20px 16px; }
+      .reg-path { padding: 18px 16px; }
+    }
+
+    /* ── Footer ── */
+    footer {
+      background: var(--green-950);
+      color: rgba(255, 255, 255, 0.7);
+      padding: 44px 32px;
+      text-align: center;
+      position: relative;
+      overflow: hidden;
+      margin-top: auto;
+    }
+
+    footer::before {
+      content: '';
+      position: absolute;
+      inset: 0;
+      background: radial-gradient(ellipse 100% 100% at 50% 0%, rgba(45, 184, 143, 0.05), transparent 70%);
+      pointer-events: none;
+    }
+
+    footer .footer-inner {
+      position: relative;
+      z-index: 1;
+      max-width: 700px;
+      margin: 0 auto;
+    }
+
+    .footer-logo-row {
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      gap: 10px;
+      margin-bottom: 16px;
+    }
+
+    .footer-logo-row img { height: 32px; width: auto; object-fit: contain; }
+
+    .footer-logo-row span {
+      font-family: 'Outfit', sans-serif;
+      font-size: 1.05rem;
+      font-weight: 700;
+      color: var(--white);
+    }
+
+    .footer-divider {
+      width: 32px;
+      height: 2px;
+      background: linear-gradient(90deg, transparent, var(--green-500), transparent);
+      border-radius: 2px;
+      margin: 18px auto;
+    }
+
+    .footer-copy {
+      font-size: 0.78rem;
+      color: rgba(255, 255, 255, 0.5);
+      line-height: 1.7;
+      font-weight: 400;
+    }
+
+    /* ── Animations ── */
+    @keyframes fadeInUp {
+      from { opacity: 0; transform: translateY(20px); }
+      to { opacity: 1; transform: translateY(0); }
+    }
+  </style>
+</head>
+<body>
+<div class="page-wrapper">
+
+  <!-- ── NAVBAR ── -->
+  <nav>
+    <img src="logo.png" alt="Logo Al-Amin Cintamulya" class="logo" onerror="this.style.display='none'" />
+    <span class="site-name">Al-Amin Cintamulya</span>
+  </nav>
+
+  <!-- ── HERO ── -->
+  <main class="hero">
+
+    <div class="badge"><span class="dot"></span>Pemberitahuan Penting</div>
+
+    <h1>Website Sedang dalam<br /><em>Masa Perbaikan</em></h1>
+
+    <p class="subtitle">
+      Kami sedang menyempurnakan sistem untuk menghadirkan layanan digital yang lebih cepat, aman, dan nyaman bagi seluruh keluarga besar Al-Amin Cintamulya. Terima kasih atas kesabarannya, kami akan segera hadir!
+    </p>
+
+    <!-- Countdown -->
+    <div class="countdown-section">
+      <div class="countdown-label">Perkiraan Kembali Online</div>
+      <div class="countdown">
+        <div class="cd-box"><div class="cd-num" id="cd-days">00</div><div class="cd-unit">Hari</div></div>
+        <div class="cd-sep">:</div>
+        <div class="cd-box"><div class="cd-num" id="cd-hours">00</div><div class="cd-unit">Jam</div></div>
+        <div class="cd-sep">:</div>
+        <div class="cd-box"><div class="cd-num" id="cd-mins">00</div><div class="cd-unit">Menit</div></div>
+        <div class="cd-sep">:</div>
+        <div class="cd-box"><div class="cd-num" id="cd-secs">00</div><div class="cd-unit">Detik</div></div>
+      </div>
+    </div>
+
+    <!-- Progress Bar -->
+    <div class="progress-section">
+      <div class="progress-header">
+        <span>Progress Pembaruan</span>
+        <span id="progress-pct">0%</span>
+      </div>
+      <div class="progress-bar"><div class="progress-fill" id="progress-fill"></div></div>
+    </div>
+
+    <!-- ── SPMB Section ── -->
+    <div class="spmb-section">
+      <div class="spmb-card">
+        <div class="spmb-header">
+
+          <div class="spmb-active-badge">
+            <span class="dot-live"></span>Pendaftaran Dibuka
+          </div>
+
+          <div class="spmb-header-main">
+            <div class="spmb-header-text">
+              <h2>Informasi SPMB T.A. 2026/2027</h2>
+              <p>Pendaftaran Murid Baru Al-Amin Cintamulya Tahun Ajaran 2026/2027 kini memasuki Gelombang II (Dua). Daftar sekarang juga!</p>
+            </div>
+          </div>
+
+          <div class="spmb-stats">
+            <div class="spmb-stat">
+              <span class="spmb-stat-num">Jalur Pendaftaran</span>
+              <span class="spmb-stat-label">Online &amp; Offline</span>
+            </div>
+          </div>
+
+        </div>
+        <div class="spmb-body">
+
+          <div class="reg-paths">
+            <div class="reg-path online">
+              <div class="reg-path-icon">
+                <svg viewBox="0 0 24 24" fill="none" xmlns="http://www.w3.org/2000/svg">
+                  <rect x="2" y="3" width="20" height="14" rx="2" stroke="currentColor" stroke-width="2"/>
+                  <path d="M8 21h8M12 17v4" stroke="currentColor" stroke-width="2" stroke-linecap="round"/>
+                </svg>
+              </div>
+              <div class="reg-path-label">Jalur Online</div>
+              <div class="reg-path-title">Daftar via Website SPMB</div>
+              <div class="reg-path-desc">Isi formulir pendaftaran kapan saja dan di mana saja melalui portal SPMB resmi kami.</div>
+            </div>
+
+            <div class="reg-path offline">
+              <div class="reg-path-icon">
+                <svg viewBox="0 0 24 24" fill="none" xmlns="http://www.w3.org/2000/svg">
+                  <path d="M12 2C8.13 2 5 5.13 5 9c0 5.25 7 13 7 13s7-7.75 7-13c0-3.87-3.13-7-7-7z" stroke="currentColor" stroke-width="2" stroke-linejoin="round"/>
+                  <circle cx="12" cy="9" r="2.5" stroke="currentColor" stroke-width="2"/>
+                </svg>
+              </div>
+              <div class="reg-path-label">Jalur Offline</div>
+              <div class="reg-path-title">Daftar ke Pesantren</div>
+              <div class="reg-path-desc">Datang langsung ke Pondok Pesantren untuk mendaftar dan konsultasi.</div>
+            </div>
+          </div>
+
+          <!-- CTA buttons -->
+          <div class="cta-row">
+            <a href="https://spmb.alamincintamulya.com" target="_blank" rel="noopener noreferrer" class="btn-primary">
+              <svg viewBox="0 0 24 24" fill="none" xmlns="http://www.w3.org/2000/svg">
+                <path d="M9 12h6M9 8h6M9 16h4" stroke="white" stroke-width="2" stroke-linecap="round"/>
+                <rect x="3" y="3" width="18" height="18" rx="3" stroke="white" stroke-width="2"/>
+              </svg>
+              Daftar Online Sekarang
+            </a>
+
+            <a href="https://wa.me/628161411178?text=Assalamu'alaikum,%20saya%20ingin%20menanyakan%20informasi%20seputar%20SPMB%20Al-Amin%20Cintamulya%202026/2027"
+               class="wa-btn" target="_blank" rel="noopener noreferrer">
+              <svg viewBox="0 0 24 24" fill="white" xmlns="http://www.w3.org/2000/svg">
+                <path d="M17.472 14.382c-.297-.149-1.758-.867-2.03-.967-.273-.099-.471-.148-.67.15-.197.297-.767.966-.94 1.164-.173.199-.347.223-.644.075-.297-.15-1.255-.463-2.39-1.475-.883-.788-1.48-1.761-1.653-2.059-.173-.297-.018-.458.13-.606.134-.133.298-.347.446-.52.149-.174.198-.298.298-.497.099-.198.05-.371-.025-.52-.075-.149-.669-1.612-.916-2.207-.242-.579-.487-.5-.669-.51-.173-.008-.371-.01-.57-.01-.198 0-.52.074-.792.372-.272.297-1.04 1.016-1.04 2.479 0 1.462 1.065 2.875 1.213 3.074.149.198 2.096 3.2 5.077 4.487.709.306 1.262.489 1.694.625.712.227 1.36.195 1.871.118.571-.085 1.758-.719 2.006-1.413.248-.694.248-1.289.173-1.413-.074-.124-.272-.198-.57-.347m-5.421 7.403h-.004a9.87 9.87 0 01-5.031-1.378l-.361-.214-3.741.982.998-3.648-.235-.374a9.86 9.86 0 01-1.51-5.26c.001-5.45 4.436-9.884 9.888-9.884 2.64 0 5.122 1.03 6.988 2.898a9.825 9.825 0 012.893 6.994c-.003 5.45-4.437 9.884-9.885 9.884m8.413-18.297A11.815 11.815 0 0012.05 0C5.495 0 .16 5.335.157 11.892c0 2.096.547 4.142 1.588 5.945L.057 24l6.305-1.654a11.882 11.882 0 005.683 1.448h.005c6.554 0 11.89-5.335 11.893-11.893a11.821 11.821 0 00-3.48-8.413z"/>
+              </svg>
+              Tanya via WhatsApp
+            </a>
+          </div>
+
+          <!-- Google Maps -->
+          <div>
+            <div class="map-label">
+              <svg viewBox="0 0 24 24" fill="none" xmlns="http://www.w3.org/2000/svg">
+                <path d="M12 2C8.13 2 5 5.13 5 9c0 5.25 7 13 7 13s7-7.75 7-13c0-3.87-3.13-7-7-7z" stroke="currentColor" stroke-width="2"/>
+                <circle cx="12" cy="9" r="2.5" stroke="currentColor" stroke-width="2"/>
+              </svg>
+              Lokasi Pondok Pesantren
+            </div>
+            <div class="map-wrap">
+              <iframe src="https://www.google.com/maps/embed?pb=!1m18!1m12!1m3!1d3971.204842822522!2d105.57590379999999!3d-5.5366085!2m3!1f0!2f0!3f0!3m2!1i1024!2i768!4f13.1!3m3!1m2!1s0x2e411d475bad481d%3A0x1b398f00d0fb7ff2!2sPondok%20Pesantren%20Istiqomah%20Al-amin%20Cintamulya!5e0!3m2!1sid!2sid!4v1775140638740!5m2!1sid!2sid" width="600" height="450" style="border:0;" allowfullscreen="" loading="lazy" referrerpolicy="no-referrer-when-downgrade"></iframe>
+            </div>
+          </div>
+
+        </div>
+      </div>
+    </div>
+
+  </main>
+
+  <!-- ── FOOTER ── -->
+  <footer>
+    <div class="footer-inner">
+      <div class="footer-logo-row">
+        <img src="logo.png" alt="Logo Al-Amin" onerror="this.style.display='none'" />
+        <span>Al-Amin Cintamulya</span>
+      </div>
+      <div class="footer-divider"></div>
+      <p class="footer-copy">
+        &copy; <span id="footer-year">2026</span> Pondok Pesantren Al-Amin Cintamulya.<br/>
+        Semua hak cipta dilindungi. Website sedang dalam masa pemeliharaan.
+      </p>
+    </div>
+  </footer>
+
+</div>
+
+<script>
+  // ── Countdown Timer ──
+  // Sesuaikan tanggal target di sini sesuai kebutuhan
+  function getTargetDateWIB() {
+    return new Date(Date.UTC(2026, 3, 13, 16, 0, 0)); // 13 April 2026 pukul 23:00 WIB
+  }
+
+  const target = getTargetDateWIB();
+
+  function updateCountdown() {
+    const now = new Date();
+    const diff = target - now;
+
+    if (diff <= 0) {
+      ['cd-days','cd-hours','cd-mins','cd-secs'].forEach(id => {
+        document.getElementById(id).textContent = '00';
+      });
+      return;
+    }
+
+    const days  = Math.floor(diff / 86400000);
+    const hours = Math.floor((diff % 86400000) / 3600000);
+    const mins  = Math.floor((diff % 3600000) / 60000);
+    const secs  = Math.floor((diff % 60000) / 1000);
+
+    document.getElementById('cd-days').textContent  = String(days).padStart(2,'0');
+    document.getElementById('cd-hours').textContent = String(hours).padStart(2,'0');
+    document.getElementById('cd-mins').textContent  = String(mins).padStart(2,'0');
+    document.getElementById('cd-secs').textContent  = String(secs).padStart(2,'0');
+  }
+
+  updateCountdown();
+  setInterval(updateCountdown, 1000);
+
+  // ── Animate Progress Bar ──
+  window.addEventListener('load', () => {
+    document.getElementById('footer-year').textContent = new Date().getFullYear();
+
+    const start = new Date(Date.UTC(2026, 3, 4, 14, 0, 0));
+    const end   = new Date(Date.UTC(2026, 3, 13, 16, 0, 0));
+    const total = end - start;
+
+    function updateProgress() {
+      const now     = new Date();
+      const elapsed = Math.min(Math.max(now - start, 0), total);
+      const pct     = Math.round((elapsed / total) * 100);
+
+      let color;
+      if (pct < 40) {
+        const t = pct / 40;
+        const g = Math.round(60 + t * 180);
+        color = `linear-gradient(90deg, rgb(220,60,60), rgb(220,${g},60))`;
+      } else if (pct < 75) {
+        const t = (pct - 40) / 35;
+        const g = Math.round(200 + t * 55);
+        const r = Math.round(220 - t * 120);
+        color = `linear-gradient(90deg, rgb(${r},${g},60), rgb(100,210,80))`;
+      } else {
+        color = `linear-gradient(90deg, var(--green-500), var(--green-400))`;
+      }
+
+      document.getElementById('progress-pct').textContent = pct + '%';
+      const fill = document.getElementById('progress-fill');
+      fill.style.background = color;
+      setTimeout(() => { fill.style.width = pct + '%'; }, 600);
+    }
+
+    updateProgress();
+  });
+</script>
+
+</body>
+</html>
