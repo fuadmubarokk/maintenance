@@ -1094,7 +1094,7 @@
       </div>
       <div class="pill-text">
         <span class="pill-label">Kami akan kembali pada</span>
-        <span class="pill-date">12 April 2026</span>
+        <span class="pill-date">13 April 2026</span>
       </div>
     </div>
 
@@ -1129,9 +1129,9 @@
 </div>
 
 <script>
-  // ── Countdown Timer to 12 April 2026 (WIB) ──
+  // ── Countdown Timer to 13 April 2026 (WIB) ──
   function getTargetDateWIB() {
-    return new Date(Date.UTC(2026, 3, 12, 1, 0, 0));
+    return new Date(Date.UTC(2026, 3, 13, 16, 0, 0));
   }
 
   const target = getTargetDateWIB();
@@ -1165,9 +1165,9 @@
   window.addEventListener('load', () => {
     document.getElementById('footer-year').textContent = new Date().getFullYear();
 
-    const start  = new Date(Date.UTC(2026, 3, 5, 1, 0, 0));
-    const end    = new Date(Date.UTC(2026, 3, 12, 1, 0, 0));
-    const total  = end - start;
+    const start = new Date(Date.UTC(2026, 3, 4, 14, 0, 0));
+    const end   = new Date(Date.UTC(2026, 3, 13, 16, 0, 0));
+    const total = end - start;
 
     function updateProgress() {
       const now     = new Date();
@@ -1186,7 +1186,7 @@
         const r = Math.round(220 - t * 120);
         color = `linear-gradient(90deg, rgb(${r},${g},60), rgb(100,210,80))`;
       } else {
-        color = `linear-gradient(90deg, var(--blue-500), var(--blue-400))`;
+        color = `linear-gradient(90deg, var(--green-500), var(--green-400))`;
       }
 
       document.getElementById('progress-pct').textContent = pct + '%';

@@ -1093,7 +1093,7 @@
       </div>
       <div class="pill-text">
         <span class="pill-label">Kami akan kembali pada</span>
-        <span class="pill-date">12 April 2026</span>
+        <span class="pill-date">13 April 2026</span>
       </div>
     </div>
 
@@ -1310,9 +1310,9 @@
 </div>
 
 <script>
-  // ── Countdown Timer to 12 April 2026 (WIB) ──
+  // ── Countdown Timer to 13 April 2026 (WIB) ──
   function getTargetDateWIB() {
-    return new Date(Date.UTC(2026, 3, 12, 1, 0, 0));
+    return new Date(Date.UTC(2026, 3, 13, 16, 0, 0));
   }
 
   const target = getTargetDateWIB();
@@ -1346,9 +1346,9 @@
   window.addEventListener('load', () => {
     document.getElementById('footer-year').textContent = new Date().getFullYear();
 
-    const start  = new Date(Date.UTC(2026, 3, 5, 1, 0, 0));
-    const end    = new Date(Date.UTC(2026, 3, 12, 1, 0, 0));
-    const total  = end - start;
+    const start = new Date(Date.UTC(2026, 3, 4, 14, 0, 0));
+    const end   = new Date(Date.UTC(2026, 3, 13, 16, 0, 0));
+    const total = end - start;
 
     function updateProgress() {
       const now     = new Date();
